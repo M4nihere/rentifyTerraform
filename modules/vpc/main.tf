@@ -59,6 +59,15 @@ resource "aws_route_table" "public" {
 }
 
 # Public Route Table Association (for Public Subnets)
+resource "aws_route_table_association" "Public_subnet_assoc" {
+  subnet_id      = aws_subnet.Beanstalk-Public-Subnet1.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "Public_subnet_assoc2" {
+  subnet_id      = aws_subnet.Beanstalk-Public-Subnet2.id
+  route_table_id = aws_route_table.public.id
+}
 
 # Private Route Table
 resource "aws_route_table" "private" {
@@ -69,12 +78,25 @@ resource "aws_route_table" "private" {
   }
 }
 
+# Private Route Table Association (for Private Subnets)
+resource "aws_route_table_association" "Private_subnet_assoc" {
+  subnet_id      = aws_subnet.Beanstalk-Private-Subnet1.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "Private_subnet_assoc2" {
+  subnet_id      = aws_subnet.Beanstalk-Private-Subnet2.id
+  route_table_id = aws_route_table.private.id
+}
+
+
+
 # Internet Gateway (for Public Route Table)
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "Beanstalk-Internet-Gateway"
+    Name = "Beanstalk-IG"
   }
 }
 
