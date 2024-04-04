@@ -116,22 +116,28 @@ resource "aws_route" "public_route" {
 }
 
 
-# Elastic IP for NAT Gateway
 resource "aws_eip" "nat_eip" {
   domain = "vpc"
-}
-
-# NAT Gateway
-resource "aws_nat_gateway" "Beanstalk_nat_gateway" {
-  allocation_id = aws_eip.nat_eip.id
-  subnet_id     = aws_subnet.Beanstalk-Private-Subnet1.id
-
   tags = {
-    Name = Beanstalk_nat_gateway
+    Name = "Beanstalk-NAT-EIP"
   }
 }
 
-# Output
+resource "aws_nat_gateway" "Beanstalk_nat_gateway" {
+  allocation_id = aws_eip.nat_eip.id
+  subnet_id     = aws_subnet.Beanstalk-Public-Subnet1.id
+  #availability_zone = aws_subnet.Beanstalk-Private-Subnet1.availability_zone
+
+  tags = {
+    Name = "Beanstalk-NAT-Gateway"
+  }
+}
+resource "aws_route" "private_route_to_nat" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.Beanstalk_nat_gateway.id
+}
+
 output "nat_gateway_id" {
   value = aws_nat_gateway.Beanstalk_nat_gateway.id
 }
