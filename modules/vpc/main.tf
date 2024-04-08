@@ -52,6 +52,7 @@ resource "aws_subnet" "Beanstalk-Private-Subnet2" {
     aws_vpc.main
   ]
   tags = {
+    
     Name = "Beanstalk-Private-Subnet2"
   }
 }
