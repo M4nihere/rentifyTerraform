@@ -16,7 +16,13 @@ resource "aws_elastic_beanstalk_environment" "Java-dev-Node-env" {
     setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
-    value     = "aws_vpc.main.id"
+    value     = "module.vpc.aws_vpc.main.id"
+  }
+    setting {
+    namespace = "aws:ec2:vpc"
+    name      = "Subnets"
+    value     = "module.vpc.aws_subnet.Beanstalk-Private-Subnet1.id"
+     #value     = "aws_subnet.Beanstalk-Private-Subnet2.id"
   }
 
 }
