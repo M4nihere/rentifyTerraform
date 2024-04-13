@@ -45,4 +45,30 @@ resource "aws_elastic_beanstalk_environment" "Java-dev-Node-env" {
     name      = "IamInstanceProfile"
     value     = module.vpc.instance_profile_name
   }
+
+    setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "EC2KeyName"
+    value     = aws_key_pair.rentify.key_name
+  }
+    setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "InstanceType"
+    value     = "t2.micro"
+  }
+    setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "EnvironmentType"
+    value     = "LoadBalanced"
+  }
+    setting {
+    namespace = "aws:ec2:instances"
+    name      = "SupportedArchitectures"
+    value     = "x86_64"
+  }
+    setting {
+    namespace = "aws:cloudformation:template:parameter"
+    name      = "EnvironmentVariables"
+    value     = "PORT=8080,M2=/usr/local/apache-maven/bin,M2_HOME=/usr/local/apache-maven,GRADLE_HOME=/usr/local/gradle"
+  }
 }

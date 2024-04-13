@@ -1,6 +1,5 @@
-
 resource "aws_iam_role" "beanstalk_role" {
-  name               = "aws-elasticbeanstalk-service-role"
+  name               = "aws-elasticbeanstalk-service-role2"
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
@@ -29,9 +28,8 @@ resource "aws_iam_role_policy_attachment" "CloudWatchLogsFullAccess" {
   role       = aws_iam_role.beanstalk_role.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
 }
-
 resource "aws_iam_role" "aws-elasticbeanstalk-ec2-role" {
-  name               = "aws-elasticbeanstalk-ec2-role"
+  name               = "aws-elasticbeanstalk-ec2-role2"
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
@@ -44,6 +42,11 @@ resource "aws_iam_role" "aws-elasticbeanstalk-ec2-role" {
         }
     ]
 })
+}
+
+resource "aws_iam_instance_profile" "beanstalk_instance_profile" {
+  name = "beanstalk_instance_profile2"
+  role = aws_iam_role.aws-elasticbeanstalk-ec2-role.name
 }
 
 resource "aws_iam_role_policy_attachment" "AWSElasticBeanstalkMulticontainerDocker" {
