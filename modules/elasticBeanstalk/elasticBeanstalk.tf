@@ -17,12 +17,6 @@ resource "aws_elastic_beanstalk_environment" "Java-dev-Node-env" {
   solution_stack_name = "64bit Amazon Linux 2 v3.7.0 running Corretto 17"  # Choose your desired platform
   # Add other configuration options as needed
   tier                = "WebServer"
-
-
-  depends_on = [
-    aws_iam_role.beanstalk_role,
-    aws_iam_role.aws-elasticbeanstalk-ec2-role
-  ]
   setting {
     namespace = "aws:ec2:vpc"
     name      = "VPCId"
@@ -32,12 +26,12 @@ resource "aws_elastic_beanstalk_environment" "Java-dev-Node-env" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = aws_subnet.Beanstalk-Private-Subnet2.id
+    value     = module.vpc.Private_subnet1
   }
     setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = aws_subnet.Beanstalk-Private-Subnet1.id
+    value     = module.vpc.Private_subnet2
   }
   
   setting {
