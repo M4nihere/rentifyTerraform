@@ -1,4 +1,0 @@
-resource "aws_key_pair" "rentify" {
-  key_name   = "rentify"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2mrZG9gHUlygp8LE/OKqRq/Yub8+gO7gNgEa/uz4wQcQt5n+ievABfwEVsG/4vJIWaS3m/3HJnT4glwaG3BiEK/kW87Vy4CVqTmsw/3nRc2sf+3uGWz/iJyGbzA70+t+dtvut9R0Y4naXv/AJn1/CTC3d4B9PNdRLfbWf4cqF2vFvHz2ZdZqHi370QHTv4OlkGqPOrJ0bLmPUd/LXL+66KC06PHqKdlkZcKfRcR+LlkiCuzxhPuvc2Jc14nc9JmNplI5/iIzE0uK0CCulZfOORsb+O84OdJycHrdiGl2Nj/BdMOMV1qM2/JOUWEEhD4BYg0PzPWT5hHaeIghYlmdy6kukr+h14bif2imhlTEwNDWz+zjefG9C1tXOkNo8SjSvhPM+Ah59KVUzuKsL++KwE5r/rV/y06JhScYAHlQxU9Tt9kNR+veQqJ/PVDwwABoD/2XpTaYFerBZfN2w07DZ3+lEveW2l7fzQf1WnvMjO7zi4Y9x1G9C5JqLq/JpXp0= root@Manish"
-}
